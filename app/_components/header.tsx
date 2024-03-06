@@ -11,7 +11,7 @@ export function Header() {
             </h1>
           </a>
         </nav>
-        <button className="text-white rounded-full py-1 px-6 bg-transparent border-2 border-white">
+        <button className="text-white rounded-full py-1 px-6 bg-transparent border-2 border-white transition-colors duration-300 ease-in-out hover:bg-white hover:text-black">
           Acessar
         </button>
       </section>
