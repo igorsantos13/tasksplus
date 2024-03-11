@@ -3,7 +3,7 @@ import hero from "../../public/hero.png";
 
 export function Main() {
   return (
-    <div className="bg-neutral-900 w-screen h-screen flex justify-center items-center">
+    <div className="bg-neutral-900 w-screen h-[calc(100vh-72px)] flex justify-center items-center overflow-hidden">
       <h1>
         <title>Tarefas+ | Organize suas tarefas de forma fácil</title>
       </h1>
@@ -22,10 +22,10 @@ export function Main() {
         </h1>
 
         <div className="flex flex-col md:flex-row items-center gap-2 justify-around w-1/2">
-          <section className="w-[150px] text-center rounded-md bg-white p-2 transition duration-150 ease-out hover:ease-in">
+          <section className="w-[150px] text-black text-center rounded-md bg-white p-2 transition duration-150 ease-out hover:ease-in">
             +12 posts
           </section>
-          <section className="w-[150px] text-center rounded-md bg-white p-2 transition duration-150 ease-out hover:ease-in">
+          <section className="w-[150px] text-black text-center rounded-md bg-white p-2 transition duration-150 ease-out hover:ease-in">
             +90 comentários
           </section>
         </div>
