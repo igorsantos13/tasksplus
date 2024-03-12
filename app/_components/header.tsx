@@ -5,8 +5,8 @@ import { useSession, signIn, signOut } from "next-auth/react";
 export function Header() {
   const { data: session, status } = useSession();
   return (
-    <header className="w-screen h-[calc(100%-100px)] bg-neutral-900">
-      <section className="p-4 w-full flex flex-row justify-between items-center">
+    <header className="w-screen h-[calc(100%-100px)] bg-neutral-900 flex items-center justify-center">
+      <section className="p-2 w-full max-w-[1024px] flex flex-row justify-between items-center">
         <nav className="flex items-center gap-2">
           <Link href="/">
             <h1 className="font-bold text-white text-4xl">

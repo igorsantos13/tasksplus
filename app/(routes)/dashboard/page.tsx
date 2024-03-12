@@ -17,24 +17,27 @@ export default async function Dashboard() {
   }
 
   return (
-    <div>
+    <div className="h-full w-full bg-neutral-900 flex  ">
       <Head>
         <title>My task dashboard</title>
       </Head>
 
-      <main className="w-full h-screen flex flex-col items-center pt-10 bg-neutral-900">
-        <section className="">
+      <main className="w-full h-full flex flex-col items-start justify-center pt-8 bg-neutral-900">
+        <section className="ml-28">
           <h1 className="font-bold text-white text-3xl mb-4">
             Qual sua tarefa?
           </h1>
-          <form action="" className="flex flex-col justify-between gap-2">
+          <form
+            action=""
+            className="flex flex-col justify-between w-full gap-2"
+          >
             <textarea
               name="tarefa"
               id="tarefa"
               cols={100}
               rows={12}
               placeholder="Digite sua tarefa..."
-              className="placeholder:text-black rounded-lg text-black p-4 focus:none focus-visible:none"
+              className="placeholder:text-black rounded-lg text-black p-2 w-full max-w-[2300px] resize-none h-36 outline-none"
             ></textarea>
             <div className="flex flex-row gap-4 items-center ">
               <input
