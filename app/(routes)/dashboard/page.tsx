@@ -17,12 +17,12 @@ export default async function Dashboard() {
   }
 
   return (
-    <div className="h-full w-full bg-neutral-900 flex  ">
+    <div className="h-[calc(100vh-56px)] w-full bg-neutral-900">
       <Head>
         <title>My task dashboard</title>
       </Head>
 
-      <main className="w-full h-full flex flex-col items-start justify-center pt-8 bg-neutral-900">
+      <main className="w-full h-full flex flex-col items-start justify-center bg-neutral-900">
         <section className="ml-28">
           <h1 className="font-bold text-white text-3xl mb-4">
             Qual sua tarefa?
