@@ -3,7 +3,7 @@ import hero from "../../public/hero.png";
 
 export function Main() {
   return (
-    <div className="bg-neutral-900 w-screen h-[calc(100vh-72px)] flex justify-center items-center overflow-hidden">
+    <div className="bg-neutral-900 w-screen h-[calc(100vh-56px)] flex justify-center items-center overflow-hidden">
       <h1>
         <title>Tarefas+ | Organize suas tarefas de forma fácil</title>
       </h1>
