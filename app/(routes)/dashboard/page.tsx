@@ -69,13 +69,16 @@ export default async function Dashboard() {
                 <Share2 className="text-blue-600" />
               </button>
             </div>
-            <div className="p-2">
+            <div className="p-2 flex flex-row items-center justify-center">
               <p>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque
                 harum expedita molestiae repellendus dignissimos odio, ex sequi
                 ab ipsam inventore corrupti veritatis nesciunt distinctio
                 corporis unde in voluptatum nostrum a!
               </p>
+              <button>
+                <Trash2 className="text-red-600" />
+              </button>
             </div>
           </article>
         </section>
