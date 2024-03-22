@@ -1,20 +1,79 @@
+"use client";
 import Head from "next/head";
 
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { Trash2, Share2 } from "lucide-react";
+import { ChangeEvent, FormEvent, useState } from "react";
+
+import { db } from "@/app/services/firebaseConnection";
+import { addDoc, collection } from "firebase/firestore";
+import { GetServerSideProps } from "next";
+import { getSession } from "next-auth/react";
+
+interface HomeProps {
+  user: {
+    email: string;
+  };
+}
 
 async function getUserSession() {
   const session = await getServerSession(authOptions);
-  return session;
+
+  if (!session?.user) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      user: {
+        email: session?.user.email,
+      },
+    },
+  };
 }
 
-export default async function Dashboard() {
-  const session = await getUserSession();
+export default function Dashboard({ user }: HomeProps) {
+  const [input, setInput] = useState("");
+  const [publicTask, setPublicTask] = useState(false);
 
-  if (!session) {
-    redirect("/");
+  async function sessionThings() {
+    const session = await getUserSession();
+    if (!session) {
+      redirect("/");
+    }
+  }
+
+  sessionThings();
+
+  function handleCheckboxClick(e: ChangeEvent<HTMLInputElement>) {
+    setPublicTask(e.target.checked);
+  }
+
+  async function handleRegisterTask(e: FormEvent) {
+    e.preventDefault();
+    console.log("alo?");
+
+    if (input == "") return;
+
+    try {
+      await addDoc(collection(db, "tarefas"), {
+        tarefa: input,
+        created: new Date(),
+        user: user?.email,
+        public: publicTask,
+      });
+      setInput("");
+      setPublicTask(false);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -30,6 +89,7 @@ export default async function Dashboard() {
               Qual sua tarefa?
             </h1>
             <form
+              onSubmit={handleRegisterTask}
               action=""
               className="flex flex-col justify-between w-full gap-2"
             >
@@ -39,18 +99,27 @@ export default async function Dashboard() {
                 cols={100}
                 rows={12}
                 placeholder="Digite sua tarefa..."
+                value={input}
+                onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+                  setInput(e.target.value)
+                }
                 className="placeholder:text-black rounded-lg text-black p-2 w-full max-w-[2300px] resize-none h-36 outline-none"
               ></textarea>
               <div className="flex flex-row gap-4 items-center ">
                 <input
                   type="checkbox"
-                  name="publica"
-                  id="publica"
+                  onChange={handleCheckboxClick}
+                  checked={publicTask}
+                  name="public"
+                  id="public"
                   className="border-4 border-slate-400 size-5 appearance-none rounded-md checked:appearance-auto"
                 />
                 <label htmlFor="publica">Deixar tarefa publica</label>
               </div>
-              <button className="bg-blue-600 rounded-md p-2 font-bold">
+              <button
+                type="submit"
+                className="bg-blue-600 rounded-md p-2 font-bold"
+              >
                 Registrar
               </button>
             </form>
@@ -86,3 +155,8 @@ export default async function Dashboard() {
     </>
   );
 }
+
+// export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+//   const session = await getSession({ req });
+
+// };
