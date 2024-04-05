@@ -35,6 +35,7 @@ async function getUserSession() {
       user: {
         email: session?.user.email,
       },
+      session,
     },
   };
 }
